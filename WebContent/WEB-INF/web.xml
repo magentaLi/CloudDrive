@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>CloudDrive</display-name>
+  <welcome-file-list>
+    <welcome-file>/</welcome-file>
+    <welcome-file>Home</welcome-file>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>InitServlet</servlet-name>
+    <servlet-class>com.clouddrive.servlet.InitServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <context-param>
+    <param-name>sql_dialect</param-name>
+    <param-value>mysql</param-value>
+  </context-param>
+  <context-param>
+    <param-name>data_source</param-name>
+    <param-value>clouddrive</param-value>
+  </context-param>
+  <filter>
+    <filter-name>loginFilter</filter-name>
+    <filter-class>com.clouddrive.filter.LoginFilter</filter-class>
+    <init-param>
+      <param-name>LOGIN_PATH</param-name>
+      <param-value>/CloudDrive/Home</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <url-pattern>/auth/*</url-pattern>
+  </filter-mapping>
+  <resource-ref>
+    <res-ref-name>jdbc/clouddrive</res-ref-name>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+</web-app>
